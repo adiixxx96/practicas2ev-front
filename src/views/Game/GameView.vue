@@ -1,21 +1,22 @@
 <template>
-  <div>
-    <h1>Game name: {{ Game.name }}</h1>
-    <h2>Game description: {{ Game.description }}</h2>
-    <h2>Current game quantity: {{ remainingCapacity }}</h2>
-    <h2>Game price:{{ Game.price }}</h2>
+  <div class="card">
+    <h1>{{ Game.name }}</h1>
+    <img src="../../assets/zelda.jpeg">
+    <h3>{{ Game.description }}</h3>
+    <h5>Current game quantity: {{ remainingCapacity }}</h5>
+    <h4>Game price: {{ Game.price }}€</h4>
     <div v-if="$store.state.user !== null">
       <div v-if="isUserRegistered">
-        <h2>You alredy have rented this game.</h2>
+        <h3>You have already rented this game.</h3>
         <button class="btn btn-danger" @click="deleteUser">Return game</button>
       </div>
       <div v-else>
-        <button v-if="!loading && remainingCapacity > 0" class="btn btn-primary" @click="registerUser">Rent this game</button>
+        <button v-if="!loading && remainingCapacity > 0" class="button" @click="registerUser">Rent this game</button>
         <div v v-if="remainingCapacity <= 0"><h2>We are sorry but this game is booked out</h2></div>
       </div>
     </div>
     <div v-else>
-      <h1>You must log in to rent a game</h1>
+      <router-link to="/Login" tag="button" class="btn btn-danger">You must log in to rent a game</router-link>
     </div>
   </div>
 </template>
@@ -111,4 +112,31 @@ export default {
 
 <style lang="scss" scoped>
 
+$primary-color: #EC33FF;
+$secondary-color: #3E4646;
+$text-color: #333333;
+$text-color-inverted: #FFF;
+  .card {
+    border: 3px solid $secondary-color;
+    width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+
+    img {
+      height: 300px;
+    }
+
+    #aviso {
+    border: 1px solid red;
+    }
+
+    .button {
+      background-color: $primary-color;
+      color: $text-color-inverted;
+      font-weight: bold;
+      border-radius: 10%;
+      border-color: $primary-color;
+    }
+    
+  }
 </style>

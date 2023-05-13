@@ -1,14 +1,14 @@
 <template>
   <div v-if="$store.state.auth">
-    <h1>Game List</h1>
+    <h1>All Games</h1>
     <button class="btn btn-warning" @click="addGame()">Add game</button>
 
-    <div>
+    <div id="buscador">
       <label for="search">Search:</label>
       <input id="search" v-model="searchTerm" type="text" style="width: 400px;" placeholder="Search by game name">
     </div>
 
-    <b-table striped hover :items="filteredGames" :fields="authFields" @row-clicked="showGameDetails">
+    <b-table striped hover :items="filteredGames" :fields="authFields" @row-clicked="showGameDetails" class="game-table">
       <template v-if="$store.state.auth" #cell(edit)="data">
         <button class="btn btn-primary" @click="editGame(data.item)">Edit</button>
         <button v-if="$store.state.auth" class="btn btn-danger" @click="deleteGame(data.item)">Delete</button>
@@ -17,16 +17,16 @@
   </div>
 
   <div v-else>
-    <h1>Game List</h1>
-    <div>
+    <h1>All Games</h1>
+    <div id="buscador">
       <label for="search">Search:</label>
       <input id="search" v-model="searchTerm" type="text" placeholder="Search by game name">
     </div>
-    <b-table striped hover :items="filteredGames" :fields="fields" @row-clicked="showGameDetails"></b-table>
+    <b-table striped hover :items="filteredGames" :fields="fields" @row-clicked="showGameDetails" class="game-table"></b-table>
   </div>
 </template>
 
-<script>
+<script> 
 import { mapState } from 'vuex';
 
 export default {
@@ -73,6 +73,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .game-table {
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
 
+  #buscador {
+    margin-top: 20px;
+
+    label {
+      margin-right: 10px;
+    }
+  }
 
 </style>
